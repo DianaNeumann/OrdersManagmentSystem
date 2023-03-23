@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import Constants from "../utilities/Constants"
 import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {DropdownContext} from "react-bootstrap/esm/DropdownContext";
 
 
 export default function OrderCreateForm(props) {    
@@ -27,27 +26,6 @@ export default function OrderCreateForm(props) {
         });
     };
 
-
-
-    function getProviders(){
-        const url = Constants.API_URL_GET_ALL_PROVIDERS;
-    
-        fetch(url, {
-          method: "GET"
-        })
-          .then(response => response.json())
-          .then(providersFromServer => {
-            var tempProviders = providersFromServer.map(item => {
-                return { label: item.Name, value: item.Id };
-              });
-            setProviders(tempProviders);
-            console.log(providersFromServer);
-          })
-          .catch((error) => {
-            console.log(error);
-            alert(error);
-          });
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

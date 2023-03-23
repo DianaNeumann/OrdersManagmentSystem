@@ -49,7 +49,7 @@ export default function OrderUpdateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const postToUpdate = {
+        const orderToUpdate = {
             id: props.order.Id,
             number: number,
             date: date,
@@ -64,20 +64,20 @@ export default function OrderUpdateForm(props) {
                 "Accept": 'application/json',
                 "Content-Type": "application/json-patch+json"
             },
-            body: JSON.stringify(postToUpdate)
+            body: JSON.stringify(orderToUpdate)
         })
             .then(response => response.json())
             .then(responseFromServer => {
                 console.log(responseFromServer);
-                console.log(postToUpdate);
+                console.log(orderToUpdate);
             })
             .catch((error) => {
                 console.log(error);
-                console.log(postToUpdate);
+                console.log(orderToUpdate);
                 alert(error);
             });
 
-        props.onOrderUpdated(postToUpdate);
+        props.onOrderUpdated(orderToUpdate);
     };
 
     return (

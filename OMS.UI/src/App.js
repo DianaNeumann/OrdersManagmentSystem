@@ -186,10 +186,10 @@ export default function App() {
     );
   }
 
-  function onOrderCreated(createdPost) {
+  function onOrderCreated(order) {
     setShowingCreateNewOrderForm(false);
 
-    if (createdPost === null) {
+    if (order === null) {
       return;
     }
 
@@ -197,23 +197,23 @@ export default function App() {
     getOrders();
   }
 
-  function onOrderUpdated(updatedPost) {
+  function onOrderUpdated(order) {
     setOrderCurrentlyBeingUpdated(null);
 
-    if (updatedPost === null) {
+    if (order === null) {
       return;
     }
 
-    let postsCopy = [...orders];
+    let ordersCopy = [...orders];
 
-    const index = postsCopy.findIndex((postsCopyPost, currentIndex) => {
-      if (postsCopyPost.Id === updatedPost.Id) {
+    const index = ordersCopy.findIndex((copyOrder, currentIndex) => {
+      if (copyOrder.Id === order.Id) {
         return true;
       }
     });
 
     if (index !== -1) {
-      postsCopy[index] = updatedPost;
+      ordersCopy[index] = order;
     }
 
     setOrders(orders);
