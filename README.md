@@ -1,5 +1,6 @@
 ## WebApi + React
 Используется:
+- Clean Architecture
 - Entity Framework
 - MediatR
 - FluentValidation (manual, потом можно добавить и автоматическую через Middleware pipeline behaviour)
