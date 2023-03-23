@@ -1,4 +1,4 @@
-using Domain.OrderItems;
+using Application.Dto.OrderItems;
 using MediatR;
 
 namespace Application.Contracts.OrderItems.Commands;
@@ -12,5 +12,5 @@ public class CreateOrderItem
         string Unit) 
         : IRequest<Response>;
 
-    public record struct Response(OrderItem OrderItem);
+    public record struct Response(OrderItemDto OrderItem);
 }

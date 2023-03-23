@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApi.Models.Providers;
 using static Application.Contracts.Providers.Commands.CreateProvider;
+using static Application.Contracts.Providers.Query.GetAllProviders;
 
 namespace Presentation.WebApi.Controllers.Providers;
 
@@ -16,15 +17,24 @@ public class ProvidersController : ControllerBase
     {
         _mediator = mediator;
     }
-    
-    public CancellationToken CancellationToken => HttpContext.RequestAborted;
+
+    private CancellationToken CancellationToken => HttpContext.RequestAborted;
 
     [HttpPost("CreateProvider")]
-    public async Task<ActionResult<ProviderDto>> CreatePlayerAsync([FromBody] CreateProviderModel model)
+    public async Task<ActionResult<ProviderDto>> CreateProviderAsync([FromBody] CreateProviderModel model)
     {
         var command = new Command(model.Name);
         var response = await _mediator.Send(command, CancellationToken);
 
         return Ok(response.Provider);
+    }
+    
+    [HttpGet("GetAllProviders")]
+    public async Task<ActionResult<IEnumerable<ProviderDto>>> GetAllProviders()
+    {
+        var query = new Query();
+        var response = await _mediator.Send(query, CancellationToken);
+
+        return Ok(response.Providers);
     }
 }

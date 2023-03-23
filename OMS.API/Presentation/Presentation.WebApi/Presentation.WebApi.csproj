@@ -9,8 +9,10 @@
 
     <ItemGroup>
         <PackageReference Include="MediatR" Version="11.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
@@ -19,12 +21,6 @@
         <ProjectReference Include="..\..\Application\Application.Dto\Application.Dto.csproj" />
         <ProjectReference Include="..\..\Application\Application\Application.csproj" />
         <ProjectReference Include="..\..\Infrastructure\Infrastructure.DataAccess\Infrastructure.DataAccess.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="database.db">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
 
 </Project>
