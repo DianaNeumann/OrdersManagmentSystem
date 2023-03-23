@@ -141,17 +141,17 @@ export default function App() {
         <input className="datepicker" type="date" onChange={(e) => setEndDate(e.target.valueAsDate)}/>
         <br></br>
 
-        <button type="button" onClick={(e) => {
+        <button type="button" className="btn btn-dark" onClick={(e) => {
           sendDate();
         }}>Filter by date</button>
         <br></br>
         
-        <button type="button" onClick={(e) => {
+        <button type="button" className="btn btn-dark" onClick={(e) => {
           sortByNumber();
         }}>Sort by number</button>
         <br></br>
 
-        <button type="button" onClick={(e) => {
+        <button type="button" className="btn btn-dark" onClick={(e) => {
           sortByProviderId();
         }}>Sort by providerId</button>
        </div>
