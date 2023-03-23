@@ -1,4 +1,5 @@
 using Application.Extensions;
+using FluentValidation.AspNetCore;
 using Infrastructure.DataAccess.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,8 @@ builder.Services.AddApplication();
 builder.Services.AddDataAccess(x => x.UseLazyLoadingProxies().UseSqlite("Data Source=database.db"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddFluentValidationAutoValidation();
+
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(c =>

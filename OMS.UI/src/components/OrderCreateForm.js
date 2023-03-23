@@ -52,6 +52,7 @@ export default function OrderCreateForm(props) {
                 console.log(JSON.stringify(orderToCreate))
             })
             .catch((error) => {
+                alert("invalid number!");
                 console.log(error);
                 console.log(orderToCreate)
             });

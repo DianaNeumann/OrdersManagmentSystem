@@ -2,7 +2,7 @@ using Application.Abstractions.DataAccess;
 using Application.Contracts.OrderItems.Commands;
 using FluentValidation;
 
-namespace Application.Validation.Validations.OrderItems;
+namespace Application.Validations.OrderItems;
 
 public class CreateOrderItemCommandValidator : AbstractValidator<CreateOrderItem.Command>
 {
@@ -13,8 +13,7 @@ public class CreateOrderItemCommandValidator : AbstractValidator<CreateOrderItem
             .WithMessage("Number cannot be empty");
 
         RuleFor(x => new {x.Name, x.OrderId})
-            .Must(x => context.Orders.Any(
-                o => o.Number.Equals(x.Name) != true))
+            .Must(o => o.Name.Equals(o.OrderId.ToString()) != true)
             .WithMessage("Order's number and order item name cannot be equals");
     }
 }

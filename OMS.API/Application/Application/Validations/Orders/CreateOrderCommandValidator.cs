@@ -2,7 +2,7 @@ using Application.Abstractions.DataAccess;
 using Application.Contracts.Orders.Commands;
 using FluentValidation;
 
-namespace Application.Validation.Validations.Orders;
+namespace Application.Validations.Orders;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrder.Command>
 {

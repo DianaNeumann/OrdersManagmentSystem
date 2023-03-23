@@ -1,5 +1,7 @@
+using Application.Behaviors;
 using Application.Services.Implementations;
 using Application.Services.Interfaces;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,9 @@ public static class ServiceCollectionExtensions
     {
         collection.AddMediatR(typeof(IAssemblyMarker));
         collection.AddScoped<IOrdersFilterService, OrdersFilterService>();
+        collection.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();
+        collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
         return collection;
     }
 }

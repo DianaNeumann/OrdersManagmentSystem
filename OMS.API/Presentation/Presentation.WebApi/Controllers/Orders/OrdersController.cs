@@ -1,6 +1,7 @@
 using Application.Contracts.Orders.Commands;
 using Application.Contracts.Orders.Query;
 using Application.Dto.Orders;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApi.Models.Orders;
@@ -21,9 +22,18 @@ public class OrdersController : ControllerBase
     private CancellationToken CancellationToken => HttpContext.RequestAborted;
 
     [HttpPost("CreateOrder")]
-    public async Task<ActionResult<OrderDto>> CreateOrderAsync([FromBody] CreateOrderModel model)
+    public async Task<ActionResult<OrderDto>> CreateOrderAsync(
+        [FromBody] CreateOrderModel model,
+        [FromServices] IValidator<CreateOrder.Command> validator)
     {
         var command = new CreateOrder.Command(model.Number, model.Date, model.ProviderId);
+     
+        var validationResult = await validator.ValidateAsync(command, CancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
+        
         var response = await _mediator.Send(command, CancellationToken);
 
         return Ok(response.Order);
@@ -39,7 +49,7 @@ public class OrdersController : ControllerBase
     }
     
     [HttpPut("UpdateOrder")]
-    public async Task<ActionResult<IEnumerable<OrderDto>>> UpdateOrderAsync(UpdateOrderModel model)
+    public async Task<ActionResult<OrderDto>> UpdateOrderAsync(UpdateOrderModel model)
     {
         var command = new UpdateOrder.Command(model.Id, model.Number, model.Date, model.ProviderId);
         
