@@ -108,7 +108,6 @@ export default function OrderUpdateForm(props) {
             <table className="table table-bordered border-dark">
                         <thead>
                             <tr>
-                            <th scope="col">item Id (PK)</th>
                             <th scope="col">item Number</th>
                             <th scope="col">quantity</th>
                             <th scope="col">unit</th>
@@ -121,8 +120,6 @@ export default function OrderUpdateForm(props) {
                                 <th scope="row">{item.Name}</th>
                                 <td>{item.Quantity}</td>
                                 <td>{item.Unit}</td>
-                                <td>
-                                </td>
                             </tr>
                             ))}
                         </tbody>

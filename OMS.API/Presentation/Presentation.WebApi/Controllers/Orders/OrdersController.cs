@@ -49,9 +49,17 @@ public class OrdersController : ControllerBase
     }
     
     [HttpPut("UpdateOrder")]
-    public async Task<ActionResult<OrderDto>> UpdateOrderAsync(UpdateOrderModel model)
+    public async Task<ActionResult<OrderDto>> UpdateOrderAsync(
+        [FromBody] UpdateOrderModel model,
+        [FromServices] IValidator<UpdateOrder.Command> validator)
     {
         var command = new UpdateOrder.Command(model.Id, model.Number, model.Date, model.ProviderId);
+        
+        var validationResult = await validator.ValidateAsync(command, CancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
         
         var response = await _mediator.Send(command, CancellationToken);
 
